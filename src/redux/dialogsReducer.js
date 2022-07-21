@@ -3,16 +3,16 @@ const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let initialState = {
     dialogs: [
-        {id: 1, name: "Vovan"}, {id: 2, name: "Vor"},
-        {id: 3, name: "Volvo"}, {id: 4, name: "Voran"},
+        {id: 1, name: "Von"}, {id: 2, name: "Vorani"},
+        {id: 3, name: "Volvo"}, {id: 4, name: "Vorago"},
         {id: 5, name: "Vokanda"},
     ],
     messages: [
-        {id: 1, message: "hi, how are you?", avatar: "https://www.meme-arsenal.com/memes/51c1e33c5df856f8d1c8378d66997c2f.jpg"},
-        {id: 2, message: "Today is friday.", avatar: "https://i1.sndcdn.com/artworks-000587383040-jzxjbs-t500x500.jpg"},
-        {id: 3, message: "Today is friday.", avatar: "https://i1.sndcdn.com/artworks-000587383040-jzxjbs-t500x500.jpg"},
-        {id: 4, message: "No homework today.", avatar: "https://i1.sndcdn.com/artworks-000587383040-jzxjbs-t500x500.jpg"},
-        {id: 5, message: "No homework today.", avatar: "https://i1.sndcdn.com/artworks-000587383040-jzxjbs-t500x500.jpg"},
+        {id: 1, message: "hi, how are you?", avatar: ""},
+        {id: 2, message: "Today is friday.", avatar: ""},
+        {id: 3, message: "Today is monday.", avatar: ""},
+        {id: 4, message: "Good luck.", avatar: ""},
+        {id: 5, message: "Happy Birthday.", avatar: ""},
     ],
     newMessageBody: "",
 };
@@ -29,7 +29,7 @@ const dialogsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 newMessageBody: '',
-                messages: [...state.messages, {id: 6, message: body, avatar: "https://www.meme-arsenal.com/memes/51c1e33c5df856f8d1c8378d66997c2f.jpg"}],
+                messages: [...state.messages, {id: 6, message: body, avatar: ""}],
             };
         default:
             return state;

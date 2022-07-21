@@ -5,7 +5,7 @@ const Header = (props) => {
     return (
         <header className={s.header}>
             <span>
-            <img src='https://st2.depositphotos.com/4230085/6185/v/950/depositphotos_61859919-stock-illustration-basketball-ball.jpg' />
+            <img src='' />
             </span>
             <div className={s.loginBlock}>
                 { props.isAuth ? props.login

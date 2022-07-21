@@ -26,7 +26,7 @@ const Dialogs = (props) => {
             </div>
             <div className={s.dialogs__messages}>
                 <div>{messageElements}</div>
-                <div className={s.addMessage + ' ' + s.right}> {/* s.right вот это доолжно ставить справа, добавить к виалогс модуль данный класс*/}
+                <div className={s.addMessage + ' ' + s.right}>
                     <div><textarea value={newMessageBody}
                                    onChange={onNewMessageChange}
                                    placeholder='Enter your message'></textarea></div>
