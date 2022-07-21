@@ -1,12 +1,23 @@
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import s from './Dialogs.module.css';
-
+import React from "react";
 
 const Dialogs = (props) => {
 
-    let dialogsElements = props.dialogs.map(d => <DialogItem name={d.name} id={d.id} />);
-    let messageElements = props.messages.map(m => <Message message={m.message} id={m.id} />);
+    let state = props.dialogsPage;
+
+    let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>);
+    let messageElements = state.messages.map(m => <Message message={m.message} avatar={m.avatar} key={m.id}/>);
+    let newMessageBody = state.newMessageBody;
+
+    let onSendMessageClick = () => {
+        props.sendMessage();
+    }
+    let onNewMessageChange = (e) => {
+        let body = e.target.value;
+        props.updateNewMessageBody(body);
+    }
 
     return (
         <div className={s.dialogs}>
@@ -14,7 +25,13 @@ const Dialogs = (props) => {
                 {dialogsElements}
             </div>
             <div className={s.dialogs__messages}>
-                {messageElements}
+                <div>{messageElements}</div>
+                <div className={s.addMessage + ' ' + s.right}> {/* s.right вот это доолжно ставить справа, добавить к виалогс модуль данный класс*/}
+                    <div><textarea value={newMessageBody}
+                                   onChange={onNewMessageChange}
+                                   placeholder='Enter your message'></textarea></div>
+                    <div><button onClick={onSendMessageClick}>Send</button></div>
+                </div>
             </div>
         </div>
     )

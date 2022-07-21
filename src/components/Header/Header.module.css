@@ -2,7 +2,17 @@
     grid-area: h;
     background-color: red;
   }
-  
+
   .header img {
     width: 70px;
   }
+
+  .loginBlock {
+      float: right;
+  }
+
+.loginBlock a {
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+}

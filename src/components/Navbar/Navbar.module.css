@@ -14,3 +14,24 @@
     text-decoration: none
 }
 
+.sideBar {
+
+}
+
+.friendsBar {
+    margin-top: 100px;
+    }
+
+.friends {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.fActive {
+    color: palegreen;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
