@@ -1,5 +1,4 @@
 import React from 'react';
-import {Route, Routes,} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
@@ -13,6 +12,7 @@ import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import {Routes, Route} from "react-router-dom";
 
 
 class App extends React.Component {

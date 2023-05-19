@@ -1,5 +1,3 @@
-import {authAPI} from "../api/api";
-import {toggleFollowingProgress} from "./usersReducer";
 import {getAuth} from "./authReducer";
 
 const INITIALIZED_SUCCESS = 'INITIALIZED-SUCCESS';

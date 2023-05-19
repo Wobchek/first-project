@@ -1,42 +1,33 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import styles from "./Login.module.css"
+import {Form, Field} from 'react-final-form'
+
+const onSubmit = () => {};
+const validate = () => {};
 
 const LoginForm = () => (
-    <div>
-        <h1>Login Form</h1>
-        <Formik
-            initialValues={{ email: '', password: '' }}
-            validate={values => {
-                const errors = {};
-                if (!values.email) {
-                    errors.email = 'Required';
-                } else if (
-                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                ) {
-                    errors.email = 'Invalid email address';
-                }
-                return errors;
-            }}
-            onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
-            }}
-        >
-            {({ isSubmitting }) => (
-                <Form>
-                    <Field type="email" name="email" />
-                    <ErrorMessage name="email" component="div" />
-                    <Field type="password" name="password" />
-                    <ErrorMessage name="password" component="div" />
-                    <button type="submit" disabled={isSubmitting}>
-                        Submit
-                    </button>
-                </Form>
-            )}
-        </Formik>
-    </div>
+    <Form
+        onSubmit={onSubmit}
+        validate={validate}
+        render={({handleSubmit}) => (
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <h2>Login Form</h2>
+                <div>
+                    <label>Login</label>
+                    <Field name="login" component="input" placeholder="Login"/>
+                </div>
+                <div>
+                    <label>Password</label>
+                    <Field name="password" component="input" placeholder="Password"/>
+                </div>
+                <div className={styles.formLast}>
+                    <label>Remember me</label>
+                    <Field name="rememberMe" component="input" type="checkbox"/>
+                </div>
+
+                <button type="submit">Login</button>
+            </form>
+        )}
+    />
 );
 
 export default LoginForm;
