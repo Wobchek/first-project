@@ -1,33 +1,31 @@
 import styles from "./Login.module.css"
-import {Form, Field} from 'react-final-form'
+import {useForm} from 'react-hook-form'
 
-const onSubmit = () => {};
-const validate = () => {};
+const LoginForm = () => {
+    const {
+        register, handleSubmit,
+        formState: {errors}
+    } = useForm(
+        {mode: "onBlur"}
+    );
+    const onSubmit = data => console.log(data);
 
-const LoginForm = () => (
-    <Form
-        onSubmit={onSubmit}
-        validate={validate}
-        render={({handleSubmit}) => (
-            <form onSubmit={handleSubmit} className={styles.form}>
-                <h2>Login Form</h2>
-                <div>
-                    <label>Login</label>
-                    <Field name="login" component="input" placeholder="Login"/>
-                </div>
-                <div>
-                    <label>Password</label>
-                    <Field name="password" component="input" placeholder="Password"/>
-                </div>
-                <div className={styles.formLast}>
-                    <label>Remember me</label>
-                    <Field name="rememberMe" component="input" type="checkbox"/>
-                </div>
+    return (
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <input placeholder="Login" {...register("login", {required: true})} />
+            {errors.exampleRequired && <span>This field is required</span>}
 
-                <button type="submit">Login</button>
-            </form>
-        )}
-    />
-);
+            <input placeholder={"Password"} {...register("password", {required: true})} />
+            {errors.exampleRequired && <span>This field is required</span>}
+
+            <div className={styles.checkbox}>
+                <label>Remember me</label>
+                <input type={"checkbox"}/>
+            </div>
+
+            <input className={styles.submit} value={"Login"} type="submit"/>
+        </form>
+    );
+}
 
 export default LoginForm;

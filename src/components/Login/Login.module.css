@@ -1,29 +1,27 @@
 .form {
-    display: flex;
-    flex-direction: column;
-    align-items: unset;
-    max-width: 300px;
-    margin: auto;
+    border: green solid 2px;
+    margin: 5% auto;
+    max-width: 20%;
 }
 
-.form h2 {
-    display: flex;
-    justify-content: center;
-}
-
-.form div {
+.form input {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin: 10px auto;
     border: #8E44AD solid 2px;
 }
 
-.form div:nth-last-of-type(1) {
+.checkbox {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    border: black solid 2px;
 }
 
-.form button {
-    margin: auto;
+.form .submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    width: 50%;
+    border: red solid 2px;
 }
