@@ -1,27 +1,50 @@
 .form {
-    border: green solid 2px;
+    border: black solid 2px;
+    padding: 10px;
     margin: 5% auto;
     max-width: 20%;
 }
 
-.form input {
+ input {
     display: flex;
-    justify-content: space-between;
     margin: 10px auto;
-    border: #8E44AD solid 2px;
+}
+
+ input:last-child {
+    margin-bottom: auto;
 }
 
 .checkbox {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border: black solid 2px;
 }
 
-.form .submit {
+.checkbox label {
+    margin-left: auto;
+}
+
+.submit {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
     width: 50%;
-    border: red solid 2px;
+    border-radius: 5px;
+    color: white;
+    background-color: #007bff;
+    border: #007bff solid 2px;
+}
+
+.submit:disabled {
+    opacity: 50%;
+}
+
+.error:focus{
+
+    height: 40px;
+}
+
+.error span {
+    display: flex;
+    margin-left: 8.82812px;
+    color: red;
+    font-size: smaller;
 }
