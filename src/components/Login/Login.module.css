@@ -5,13 +5,13 @@
     max-width: 20%;
 }
 
- input {
-    display: flex;
-    margin: 10px auto;
+.h1 {
+    display: none;
 }
 
- input:last-child {
-    margin-bottom: auto;
+.h2 {
+display: flex;
+    justify-content: space-around;
 }
 
 .checkbox {
@@ -48,3 +48,14 @@
     color: red;
     font-size: smaller;
 }
+
+
+input {
+    display: flex;
+    margin: 10px auto;
+}
+
+input:last-child {
+    margin-bottom: auto;
+}
+

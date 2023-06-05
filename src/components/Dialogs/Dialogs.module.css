@@ -40,3 +40,17 @@
     padding-right: 20%;
     text-align: center
 }
+
+.submit {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    border-radius: 5px;
+    color: white;
+    background-color: #007bff;
+    border: #007bff solid 2px;
+}
+
+.submit:disabled {
+    opacity: 50%;
+}

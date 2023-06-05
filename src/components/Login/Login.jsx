@@ -21,6 +21,11 @@ const LoginForm = () => {
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <h1 className={styles.h1}>authorizationPage</h1>
+            <div className={styles.h2}>
+                <h2>Login</h2>
+                <h2>Register</h2>
+            </div>
             <input placeholder="Login" {...register("login", {
                 required: true,
                 minLength: minLengthErMes,

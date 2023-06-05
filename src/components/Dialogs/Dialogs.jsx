@@ -1,37 +1,44 @@
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import s from './Dialogs.module.css';
+import styles from './Dialogs.module.css';
 import React from "react";
+import {useForm} from "react-hook-form";
 
 const Dialogs = (props) => {
+    const {
+        register, handleSubmit,
+        formState: {isValid}, reset,
+    } = useForm(
+        {mode: "onBlur"}
+    );
+    const onSubmit = (data) => {
+        props.sendMessage(data.message)
+        reset();
+    };
 
     let state = props.dialogsPage;
 
     let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>);
     let messageElements = state.messages.map(m => <Message message={m.message} avatar={m.avatar} key={m.id}/>);
-    let newMessageBody = state.newMessageBody;
-
-    let onSendMessageClick = () => {
-        props.sendMessage();
-    }
-    let onNewMessageChange = (e) => {
-        let body = e.target.value;
-        props.updateNewMessageBody(body);
-    }
 
     return (
-        <div className={s.dialogs}>
-            <div className={s.dialogs__items}>
+        <div className={styles.dialogs}>
+            <div className={styles.dialogs__items}>
                 {dialogsElements}
             </div>
-            <div className={s.dialogs__messages}>
+            <div className={styles.dialogs__messages}>
                 <div>{messageElements}</div>
-                <div className={s.addMessage + ' ' + s.right}>
-                    <div><textarea value={newMessageBody}
-                                   onChange={onNewMessageChange}
-                                   placeholder='Enter your message'></textarea></div>
-                    <div><button onClick={onSendMessageClick}>Send</button></div>
-                </div>
+                {/*<div className={styles.addMessage + ' ' + s.right}>*/}
+                {/*    <div><textarea value={newMessageBody}*/}
+                {/*                   onChange={onNewMessageChange}*/}
+                {/*                   placeholder='Enter your message'></textarea></div>*/}
+                {/*    <div><button onClick={onSendMessageClick}>Send</button></div>*/}
+                {/*</div>*/}
+
+                <form className={styles.addMessage + ' ' + styles.right} onSubmit={handleSubmit(onSubmit)}>
+                    <input placeholder="You message..." {...register("message", {required: true})} />
+                    <input className={styles.submit} value={"Send"} type="submit" disabled={!isValid}/>
+                </form>
             </div>
         </div>
     )
