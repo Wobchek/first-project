@@ -1,33 +1,31 @@
 import React from 'react';
-import s from './MyPosts.module.css';
+import styles from './MyPosts.module.css';
 import Post from './Post/Post';
+import {useForm} from "react-hook-form";
 
 const MyPosts = (props) => {
+    const {
+        register, handleSubmit,
+        formState: {isValid}, reset,
+    } = useForm(
+        {mode: "onBlur"}
+    );
+    const onSubmit = (data) => {
+        props.addPost(data.post)
+        reset();
+    };
+
     let postsElements =
         props.postsData.map(p => <Post message={p.message} likeCount={p.likeCount}/>);
 
-    let newPostElement = React.createRef();
-
-    let onAddPost = () => {
-        props.addPost();
-    }
-
-    let onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text);
-    }
-
     return (
-        <div className={s.postsBlock}>
-            <h3>My posts</h3>
-            <div>
-                <textarea onChange={ onPostChange } ref={newPostElement}
-                          value={props.newPostText}/>
-                <div>
-                    <button onClick={ onAddPost }>Add post</button>
-                </div>
-            </div>
-            <div className={s.posts}>
+        <div className={styles.postsBlock}>
+            <h1>My posts</h1>
+            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                <textarea placeholder="You post text..." {...register("post", {required: true})} />
+                <input className={styles.form_submit} value={"Add post"} type="submit" disabled={!isValid}/>
+            </form>
+            <div className={styles.posts}>
                 {postsElements}
             </div>
         </div>

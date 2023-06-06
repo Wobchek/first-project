@@ -28,15 +28,9 @@ const Dialogs = (props) => {
             </div>
             <div className={styles.dialogs__messages}>
                 <div>{messageElements}</div>
-                {/*<div className={styles.addMessage + ' ' + s.right}>*/}
-                {/*    <div><textarea value={newMessageBody}*/}
-                {/*                   onChange={onNewMessageChange}*/}
-                {/*                   placeholder='Enter your message'></textarea></div>*/}
-                {/*    <div><button onClick={onSendMessageClick}>Send</button></div>*/}
-                {/*</div>*/}
 
-                <form className={styles.addMessage + ' ' + styles.right} onSubmit={handleSubmit(onSubmit)}>
-                    <input placeholder="You message..." {...register("message", {required: true})} />
+                <form className={styles.addMessage} onSubmit={handleSubmit(onSubmit)}>
+                    <textarea  placeholder="You message..." {...register("message", {required: true})} />
                     <input className={styles.submit} value={"Send"} type="submit" disabled={!isValid}/>
                 </form>
             </div>
