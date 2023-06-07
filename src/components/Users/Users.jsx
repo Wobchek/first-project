@@ -33,7 +33,8 @@ let Users = (props) => {
                                 : userPhoto}/>
                                 </NavLink>
                         </div>
-                        <div>
+                        { props.isAuth
+                            ? <div>
                             {u.followed
                                 ? <button disabled={props.followingInProgress
                                     .some( id => id === u.id)}
@@ -43,7 +44,8 @@ let Users = (props) => {
                                     .some( id => id === u.id)}
                                           onClick={() => { props.follow(u.id)
                                 }}>Follow</button>}
-                        </div>
+                            </div>
+                            : null}
                     </span>
                 <span>
                         <span>

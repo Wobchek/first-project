@@ -18,8 +18,9 @@ class UsersContainer extends React.Component {
     render() {
 
         return <>
-            {this.props.isFetching ?
-                <Preloader/> : null}
+            {this.props.isFetching
+                ? <Preloader/>
+                : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
@@ -28,6 +29,7 @@ class UsersContainer extends React.Component {
                    unfollow={this.props.unfollow}
                    onPageChanged={this.onPageChanged}
                    followingInProgress={this.props.followingInProgress}
+                   isAuth={this.props.isAuth}
             />
         </>
     }
@@ -41,6 +43,7 @@ let mapStateToProps = (state) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth,
     }
 };
 

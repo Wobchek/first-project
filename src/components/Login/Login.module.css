@@ -59,3 +59,19 @@ input:last-child {
     margin-bottom: auto;
 }
 
+.passWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 181px;
+    margin: 0 8.82812px;
+}
+
+img {
+    max-width: 16px;
+    max-height: 16px;
+}
+img:hover {
+    cursor: pointer;
+}
+
