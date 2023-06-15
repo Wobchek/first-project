@@ -5,6 +5,7 @@ import crossedEye from "../../assets/images/crossed-icon-eye.png"
 import {useState} from "react";
 import {login} from "../../redux/authReducer";
 import {connect} from "react-redux";
+import { Navigate } from "react-router-dom";
 
 const LoginForm = (props) => {
     const {
@@ -15,21 +16,24 @@ const LoginForm = (props) => {
         {mode: "onBlur"}
     );
     const onSubmit = (data) => {
-        alert(JSON.stringify(data))
+        // alert(JSON.stringify(data))
         props.login(data.email, data.password, data.rememberMe)
         reset();
     };
-
+    //Состояние отображения символов пароля
     const [passwordShown, setPasswordShown] = useState(false);
-
     const togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
     };
-
+    //Минимальная длинна для пароля и логина
     let minLengthErMes = {
         value: 8,
         message: "⚠ Minimum 8 symbols",
     };
+    //Редирект на профиль
+    if (props.isAuth) {
+        return <Navigate to="/profile"/>
+    }
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -66,5 +70,7 @@ const LoginForm = (props) => {
         </form>
     );
 }
+const mapStateToProps = (state) => ({
+        isAuth: state.auth.isAuth})
 
-export default connect(null, { login } )(LoginForm);
+export default connect(mapStateToProps, { login } )(LoginForm);
