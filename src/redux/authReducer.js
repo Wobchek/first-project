@@ -1,7 +1,7 @@
 import {authAPI} from "../api/api";
-import {toggleFollowingProgress} from "./usersReducer";
+import {toggleIsFetching} from "./usersReducer";
 
-const SET_USER_DATA = 'SET-USER-DATA';
+const SET_USER_PAYLOAD = 'SET-USER-PAYLOAD';
 
 let initialState = {
     userId: null,
@@ -13,10 +13,10 @@ let initialState = {
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_USER_DATA:
+        case SET_USER_PAYLOAD:
             return {
                 ...state,
-                ...action.data,
+                ...action.payload,
                 isAuth: true,
             };
         default:
@@ -24,18 +24,37 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setAuthUserData = (userId, email, login) => ({type: SET_USER_DATA, data: {userId, email, login}});
+export const setAuthUserPayload = (userId, email, login, isAuth) => ({type: SET_USER_PAYLOAD, payload: {userId, email, login, isAuth}});
 
 export const getAuth = () => (dispatch) => {
-    dispatch(toggleFollowingProgress(true));
+    dispatch(toggleIsFetching(true));
     return authAPI.getAuth().then(response => {
         if (response.data.resultCode === 0) {
             let {id, login, email} = response.data.data;
-            dispatch(setAuthUserData(id, email, login));
+            dispatch(setAuthUserPayload(id, email, login, true));
         }
-        dispatch(toggleFollowingProgress(false));
+        dispatch(toggleIsFetching(false));
     });
+};
 
+export const login = (email, password, rememberMe) => (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    return authAPI.login(email, password, rememberMe).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(getAuth())
+        }
+        dispatch(toggleIsFetching(false));
+    });
+};
+
+export const logout = () => (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    return authAPI.logout().then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(setAuthUserPayload(null, null, null, false));
+        }
+        dispatch(toggleIsFetching(false));
+    });
 };
 
 export default authReducer;

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 const instance = axios.create({
     withCredentials: true,
     headers: {"API-KEY": "4cc1e653-c370-4c56-adee-c15518149fc3"},
@@ -12,40 +11,29 @@ export const usersAPI = {
         return instance.get(`users?page=${currentPage}&count=${pagesCount}`)
             .then(response => {
                 return response.data;
-            });
-    },
-
+            });},
     unfollow(id) {
-        return instance.delete(`follow/${id}`)
-    },
-
+        return instance.delete(`follow/${id}`)},
     follow(id) {
-        return instance.post(`follow/${id}`)
-    },
-
-    getUserProfile(userId) {
-        console.log('Obsolete method. Please use profileAPI object.')
-        return profileAPI.getUserProfile(userId)
-    },
+        return instance.post(`follow/${id}`)},
 };
 
 export const profileAPI = {
     getUserProfile(userId) {
-        return instance.get(`profile/${userId}`)
-    },
+        return instance.get(`profile/${userId}`)},
     getStatusProfile(userId) {
-        return instance.get(`profile/status/${userId}`)
-    },
+        return instance.get(`profile/status/${userId}`)},
     updateStatusProfile(status) {
         return instance.put(`profile/status`, {
             status: status,
-        })
-    },
+        })},
 };
 
 export const authAPI = {
-
     getAuth() {
-        return instance.get(`auth/me`)
-    },
+        return instance.get(`auth/me`)},
+    login(email, password, rememberMe = false) {
+        return instance.post(`auth/login`, {email, password, rememberMe})},
+    logout() {
+        return instance.delete(`auth/login`)},
 };

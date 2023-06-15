@@ -67,7 +67,7 @@ input:last-child {
     margin: 0 8.82812px;
 }
 
-img {
+.passWrapper img {
     max-width: 16px;
     max-height: 16px;
 }

@@ -3,8 +3,10 @@ import {useForm} from "react-hook-form"
 import eye from "../../assets/images/icon-eye.png"
 import crossedEye from "../../assets/images/crossed-icon-eye.png"
 import {useState} from "react";
+import {login} from "../../redux/authReducer";
+import {connect} from "react-redux";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
     const {
         register, handleSubmit,
         formState: {errors, isValid},
@@ -14,6 +16,7 @@ const LoginForm = () => {
     );
     const onSubmit = (data) => {
         alert(JSON.stringify(data))
+        props.login(data.email, data.password, data.rememberMe)
         reset();
     };
 
@@ -32,15 +35,15 @@ const LoginForm = () => {
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <h1 className={styles.h1}>authorizationPage</h1>
             <div className={styles.h2}>
-                <h2>Login</h2>
+                <h2>Sign in</h2>
                 <h2>Register</h2>
             </div>
-            <input placeholder="Login" {...register("login", {
+            <input placeholder="Email" {...register("email", {
                 required: true,
                 minLength: minLengthErMes,
             })} />
             <div className={styles.error}>
-                {errors?.login && <span>{errors?.login?.message || "⚠ This field is required"}</span>}
+                {errors?.email && <span>{errors?.email?.message || "⚠ This field is required"}</span>}
             </div>
             <div className={styles.passWrapper}>
                 <input placeholder={"Password"}
@@ -56,12 +59,12 @@ const LoginForm = () => {
 
             <div className={styles.checkbox}>
                 <label>Remember me</label>
-                <input type={"checkbox"}/>
+                <input type={"checkbox"} {...register("rememberMe")}/>
             </div>
 
-            <input className={styles.submit} value={"Login"} type="submit" disabled={!isValid}/>
+            <input className={styles.submit} value={"Email"} type="submit" disabled={!isValid}/>
         </form>
     );
 }
 
-export default LoginForm;
+export default connect(null, { login } )(LoginForm);
