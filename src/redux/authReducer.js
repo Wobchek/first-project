@@ -36,11 +36,16 @@ export const getAuth = () => (dispatch) => {
     });
 };
 
-export const login = (email, password, rememberMe) => (dispatch) => {
+export const login = (email, password, rememberMe, setError) => (dispatch) => {
     dispatch(toggleIsFetching(true));
     return authAPI.login(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) {
             dispatch(getAuth())
+        } else {
+            setError("server", {
+                // type: "custom",
+                message: response.data.messages
+            });
         }
         dispatch(toggleIsFetching(false));
     });
