@@ -14,5 +14,5 @@ export default compose(
     connect(mapStateToProps, {
         sendMessage
     }),
-    // withAuthRedirect
+    withAuthRedirect
 )(Dialogs);

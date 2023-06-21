@@ -35,8 +35,9 @@ const LoginForm = (props) => {
         message: "⚠ Minimum 8 symbols",
     };
     //Редирект на профиль
+    // let profile = `/profile/${props.userId}`;
     if (props.isAuth) {
-        return <Navigate to="/profile"/>
+        return <Navigate to="/profile" />
     }
 
     return (
@@ -78,6 +79,8 @@ const LoginForm = (props) => {
     );
 }
 const mapStateToProps = (state) => ({
-        isAuth: state.auth.isAuth})
+        isAuth: state.auth.isAuth,
+        userId: state.auth.userId,
+})
 
 export default connect(mapStateToProps, { login } )(LoginForm);
