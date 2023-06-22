@@ -74,7 +74,7 @@ const LoginForm = (props) => {
             <div className={styles.error}>
                 {errors.server && <span>⚠ {errors.server.message}</span>}
             </div>
-            <input className={styles.submit} value={"Email"} type="submit" disabled={!isValid}/>
+            <input className={styles.submit} value={"Login"} type="submit" disabled={!isValid}/>
         </form>
     );
 }

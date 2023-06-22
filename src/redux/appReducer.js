@@ -21,8 +21,7 @@ const appReducer = (state = initialState, action) => {
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 
 export const initializeApp = () => (dispatch) => {
-    let promise = dispatch(getAuth());
-    promise.then(() => {
+    dispatch(getAuth()).then(() => {
         dispatch(initializedSuccess());
     })
 };
