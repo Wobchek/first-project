@@ -1,29 +1,32 @@
+import React from 'react';
 import {connect} from "react-redux";
 import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow,} from "../../redux/usersReducer";
 import Users from './Users';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
-const UsersContainer = (props) => {
-    props.getUsers(props.currentPage, props.pageSize);
+class UsersContainer extends React.Component {
+    componentDidMount() {
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    }
 
-    let onPageChanged = (pageNumber) => {
-        props.getUsers(pageNumber, props.pageSize);
-    };
+    onPageChanged = (pageNumber) => {
+        this.props.getUsers(pageNumber, this.props.pageSize);
+    }
 
-    return (
-        <Users totalUsersCount={props.totalUsersCount}
-               pageSize={props.pageSize}
-               currentPage={props.currentPage}
-               users={props.users}
-               follow={props.follow}
-               unfollow={props.unfollow}
-               onPageChanged={onPageChanged}
-               followingInProgress={props.followingInProgress}
-               isAuth={props.isAuth}
-        />
-    )
-};
+    render() {
+        return (
+            <Users totalUsersCount={this.props.totalUsersCount}
+                   pageSize={this.props.pageSize}
+                   currentPage={this.props.currentPage}
+                   onPageChanged={this.onPageChanged}
+                   users={this.props.users}
+                   follow={this.props.follow}
+                   unfollow={this.props.unfollow}
+                   followingInProgress={this.props.followingInProgress}
+            />)
+    }
+}
 
 let mapStateToProps = (state) => {
     return {
@@ -39,8 +42,8 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {
-        setCurrentPage,
-        toggleFollowingProgress, getUsers, follow, unfollow,
+        setCurrentPage, toggleFollowingProgress,
+        getUsers, follow, unfollow,
     }),
     withAuthRedirect
 )(UsersContainer);
