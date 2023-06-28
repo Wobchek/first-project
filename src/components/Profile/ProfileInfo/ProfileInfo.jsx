@@ -1,4 +1,4 @@
-import s from './ProfileInfo.module.css';
+import styles from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 
@@ -9,26 +9,26 @@ const ProfileInfo = (props) => {
     }
 
     let userContacts = () => {
-        let result = '';
+        let contacts = '';
+        let result = [];
         for (let userContacts in props.profile.contacts) {
             if (props.profile.contacts[userContacts] != null) {
-                result += " " + userContacts + ": " + props.profile.contacts[userContacts];
-            }}
+                contacts = `${Number(userContacts) + 1}: ${props.profile.contacts[userContacts]}`;
+                result.push(props.profile.contacts.length - 1 != userContacts
+                    ? contacts + ", "
+                    : contacts + ".");
+            }
+        }
         return result;
     };
 
     return (
-        <div>
-            {/*<div>*/}
-            {/*    <img src=''/>*/}
-            {/*</div>*/}
-            <div className={s.descriptionBlock}>
-                <div>{props.profile.aboutMe}</div>
-                <img src={props.profile.photos.large}/>
-                <ProfileStatus status={props.status} updateStatusProfile={props.updateStatusProfile} />
-                Мои контакты
-                <div>{userContacts()}</div>
-            </div>
+        <div className={styles.descriptionBlock}>
+            <div>{props.profile.aboutMe}</div>
+            <img src={props.profile.photos.large}/>
+            <ProfileStatus status={props.status} updateStatusProfile={props.updateStatusProfile}/>
+            Мои контакты :
+            <div>{userContacts()}</div>
         </div>
     )
 };

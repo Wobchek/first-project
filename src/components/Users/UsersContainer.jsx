@@ -14,10 +14,10 @@ import {
 
 const UsersContainer = (props) => {
     useEffect(() => {
-        const fetchData = async () => {
+        async function fetchData() {
             await props.requestUsers(props.currentPage, props.pageSize);
         }
-        return fetchData();
+        fetchData();
     }, []);
 
     let onPageChanged = (pageNumber) => {

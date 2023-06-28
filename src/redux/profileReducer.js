@@ -1,4 +1,5 @@
 import {profileAPI} from "../api/api";
+import field from "../assets/images/basketball_field.jpg";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -10,8 +11,16 @@ let initialState = {
         {id: 2, message: "It`s my first post.", likeCount: 20},
         {id: 3, message: "Du hast!", likeCount: 5000},
     ],
-    profile: null,
+    profile: {
+        aboutMe: "Chaker",
+        photos: {
+            large: field,
+            small: field,
+        },
+        contacts: ["vk.com", "tikitoki"],
+    },
     status: "",
+
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -32,7 +41,7 @@ const profileReducer = (state = initialState, action) => {
         case SET_USER_PROFILE: {
             return {
                 ...state,
-                profile: action.profile,
+                profile: [...state.profile, action.profile],
             };
         }
         case SET_STATUS_PROFILE: {
