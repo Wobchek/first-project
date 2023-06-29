@@ -14,11 +14,15 @@ import {
 
 const UsersContainer = (props) => {
     useEffect(() => {
-        async function fetchData() {
-            await props.requestUsers(props.currentPage, props.pageSize);
-        }
-        fetchData();
-    }, []);
+        props.requestUsers(props.currentPage, props.pageSize);
+    }, [props.currentPage]);
+
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         await props.requestUsers(props.currentPage, props.pageSize);
+    //     }
+    //     fetchData();
+    // }, []);
 
     let onPageChanged = (pageNumber) => {
         props.requestUsers(pageNumber, props.pageSize);
