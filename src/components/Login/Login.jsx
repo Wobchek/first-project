@@ -7,7 +7,7 @@ import {login} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import { Navigate } from "react-router-dom";
 
-const LoginForm = (props) => {
+const LoginForm = ({login, isAuth}) => {
     const {
         register, handleSubmit,
         formState: {errors, isValid},
@@ -17,7 +17,7 @@ const LoginForm = (props) => {
     );
     const onSubmit = (data) => {
         // alert(JSON.stringify(data))
-        props.login(data.email, data.password, data.rememberMe, setError)
+        login(data.email, data.password, data.rememberMe, setError)
         reset({
             email: "",
             password: "",
@@ -36,7 +36,7 @@ const LoginForm = (props) => {
     };
     //Редирект на профиль
     // let profile = `/profile/${props.userId}`;
-    if (props.isAuth) {
+    if (isAuth) {
         return <Navigate to="/profile" />
     }
 
