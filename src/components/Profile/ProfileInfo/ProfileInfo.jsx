@@ -3,18 +3,18 @@ import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 
 
-const ProfileInfo = (props) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, status, updateStatusProfile}) => {
+    if (!profile) {
         return <Preloader/>
     }
 
     let userContacts = () => {
         let contacts = '';
         let result = [];
-        for (let userContacts in props.profile.contacts) {
-            if (props.profile.contacts[userContacts] != null) {
-                contacts = `${Number(userContacts) + 1}: ${props.profile.contacts[userContacts]}`;
-                result.push(props.profile.contacts.length - 1 != userContacts
+        for (let userContacts in profile.contacts) {
+            if (profile.contacts[userContacts] != null) {
+                contacts = `${Number(userContacts) + 1}: ${profile.contacts[userContacts]}`;
+                result.push(profile.contacts.length - 1 != userContacts
                     ? contacts + ", "
                     : contacts + ".");
             }
@@ -22,11 +22,12 @@ const ProfileInfo = (props) => {
         return result;
     };
 
+    console.log(profile.photos.large)
     return (
         <div className={styles.descriptionBlock}>
-            <div>{props.profile.aboutMe}</div>
-            <img src={props.profile.photos.large}/>
-            <ProfileStatus status={props.status} updateStatusProfile={props.updateStatusProfile}/>
+            <div>{profile.aboutMe}</div>
+            <img src={profile.photos.large}/>
+            <ProfileStatus status={status} updateStatusProfile={updateStatusProfile}/>
             Мои контакты :
             <div>{userContacts()}</div>
         </div>
