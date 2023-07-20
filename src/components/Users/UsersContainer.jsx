@@ -8,7 +8,7 @@ import {
     getFollowingInProgress,
     getIsFetching,
     getPageSize,
-    getTotalUsersCount,
+    getTotalItemsCount,
     getUsers
 } from "../../redux/usersSelectors";
 
@@ -29,7 +29,7 @@ const UsersContainer = (props) => {
     }
 
     return (
-        <Users totalUsersCount={props.totalUsersCount}
+        <Users totalItemsCount={props.totalItemsCount}
                pageSize={props.pageSize}
                currentPage={props.currentPage}
                onPageChanged={onPageChanged}
@@ -45,7 +45,7 @@ let mapStateToProps = (state) => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
-        totalUsersCount: getTotalUsersCount(state),
+        totalItemsCount: getTotalItemsCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state),

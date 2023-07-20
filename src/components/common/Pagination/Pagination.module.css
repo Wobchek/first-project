@@ -1,3 +1,17 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pages{
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    border: 1px solid green;
+    min-width: 20px;
+}
+
 .selectedPage{
     font-weight: bold;
+    background-color: green;
 }
