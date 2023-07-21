@@ -1,12 +1,9 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Friends from './components/Friends/Friends';
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
@@ -14,6 +11,13 @@ import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {Routes, Route} from "react-router-dom";
 
+const DialogsContainer = lazy(() => import("./components/Dialogs/DialogsContainer"));
+const UsersContainer = lazy(() => import("./components/Users/UsersContainer"));
+const ProfileContainer = lazy(() => import("./components/Profile/ProfileContainer"));
+
+function Loading() {
+    return <h2>🌀 Loading...</h2>;
+}
 
 class App extends React.Component {
 
@@ -31,31 +35,33 @@ class App extends React.Component {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Routes>
-                        <Route path="/news"
-                               element={<News/>}/>
+                    <Suspense fallback={<Loading/>}>
+                        <Routes>
+                            <Route path="/news"
+                                   element={<News/>}/>
 
-                        <Route path="/profile/:userId/"
-                               element={<ProfileContainer/>}/>
+                            <Route path="/profile/:userId/"
+                                   element={<ProfileContainer/>}/>
 
-                        <Route path="/profile/"
-                               element={<ProfileContainer/>}/>
+                            <Route path="/profile/"
+                                   element={<ProfileContainer/>}/>
 
-                        <Route exact path="/dialogs"
-                               element={<DialogsContainer/>}/>
+                            <Route exact path="/dialogs"
+                                   element={<DialogsContainer/>}/>
 
-                        <Route path="/settings"
-                               element={<Settings/>}/>
+                            <Route path="/settings"
+                                   element={<Settings/>}/>
 
-                        <Route path="/login"
-                               element={<Login/>}/>
+                            <Route path="/login"
+                                   element={<Login/>}/>
 
-                        <Route path="/users"
-                               element={<UsersContainer/>}/>
+                            <Route path="/users"
+                                   element={<UsersContainer/>}/>
 
-                        <Route path="/friends"
-                               element={<Friends/>}/>
-                    </Routes>
+                            <Route path="/friends"
+                                   element={<Friends/>}/>
+                        </Routes>
+                    </Suspense>
                 </div>
             </div>
         )
