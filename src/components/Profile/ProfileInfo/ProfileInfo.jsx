@@ -1,9 +1,10 @@
 import styles from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
+import userPhoto from "../../../assets/images/user.jpg";
 
 
-const ProfileInfo = ({profile, status, updateStatusProfile}) => {
+const ProfileInfo = ({profile, status, updateStatusProfile, isOwner, savePhoto}) => {
     if (!profile) {
         return <Preloader/>
     }
@@ -22,11 +23,18 @@ const ProfileInfo = ({profile, status, updateStatusProfile}) => {
         return result;
     };
 
+    const onMainPhotoSelected = (e) => {
+        if(e.target.files.length) {
+            savePhoto(e.target.files[0]);
+        }
+    }
+
     console.log(profile.photos.large)
     return (
         <div className={styles.descriptionBlock}>
             <div>{profile.aboutMe}</div>
-            <img src={profile.photos.large}/>
+            <img src={profile.photos.large || userPhoto} className={styles.mainPhoto}/>
+            {isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
             <ProfileStatus status={status} updateStatusProfile={updateStatusProfile}/>
             Мои контакты :
             <div>{userContacts()}</div>
